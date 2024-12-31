@@ -18,11 +18,29 @@ func main() {
 	if err != nil {
 		log.Fatalf("Error loading .env file: %v", err)
 	}
+
+	// Запуск HTTP-сервера
+	go func() {
+		http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+			fmt.Fprint(w, "Telegram bot is running")
+		})
+		port := os.Getenv("PORT")
+		if port == "" {
+			port = "8080"
+		}
+		log.Fatal(http.ListenAndServe(":"+port, nil))
+	}()
+
 	botToken := os.Getenv("TELEGRAM_BOT_TOKEN")
+	if botToken == "" {
+		log.Fatal("TELEGRAM_BOT_TOKEN is not set")
+	}
 	databaseURL := os.Getenv("DATABASE_URL")
+	if databaseURL == "" {
+		log.Fatal("DATABASE_URL is not set")
+	}
 
 	log.Println("Начало инициализации базы данных")
-	// Инициализация базы данных
 	initDB(databaseURL)
 
 	// Инициализация бота
@@ -59,6 +77,10 @@ func main() {
 
 func handleMessage(bot *tgbotapi.BotAPI, update tgbotapi.Update) {
 	log.Println("handleMessage start")
+	if update.Message.From == nil {
+		log.Println("Message has no sender")
+		return
+	}
 	userID := update.Message.From.ID
 	text := update.Message.Text
 	log.Printf("Message received: %s", text)
@@ -88,6 +110,10 @@ func handleMessage(bot *tgbotapi.BotAPI, update tgbotapi.Update) {
 }
 
 func handleCallback(bot *tgbotapi.BotAPI, update tgbotapi.Update) {
+	if update.CallbackQuery.From == nil {
+		log.Println("CallbackQuery has no sender")
+		return
+	}
 	userID := update.CallbackQuery.From.ID
 	answer := update.CallbackQuery.Data
 	messageId := update.CallbackQuery.Message.MessageID
@@ -122,19 +148,4 @@ func handleCallback(bot *tgbotapi.BotAPI, update tgbotapi.Update) {
 			log.Println("Error answering callback:", err)
 		}
 	}
-}
-
-// Запускаем простой сервер для проверки работы.
-// Чтобы не было проблем с Heroku, и можно было развернуть приложение
-func init() {
-	go func() {
-		http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-			fmt.Fprint(w, "Telegram bot is running")
-		})
-		port := os.Getenv("PORT")
-		if port == "" {
-			port = "8080"
-		}
-		log.Fatal(http.ListenAndServe(":"+port, nil))
-	}()
 }
