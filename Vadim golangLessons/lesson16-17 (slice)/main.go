@@ -28,7 +28,7 @@ func showAllElements(values ...int) {
 	for _, val := range values {
 		fmt.Println("Value:", val)
 	}
-	fmt.Println()
+	fmt.Println("======")
 }
 
 func convertToArrayPointer() {

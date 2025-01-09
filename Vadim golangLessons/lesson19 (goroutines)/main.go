@@ -2,10 +2,12 @@ package main
 
 import (
 	"fmt"
+	"runtime"
+	"time"
 )
 
 func main() {
-	// defer block
+	//defer block
 	//defer fmt.Println(1)
 	//defer fmt.Println(2)
 	//fmt.Println(sum(2, 3))
@@ -13,12 +15,12 @@ func main() {
 
 	// goroutines block
 	//runtime.GOMAXPROCS(1)
-	//fmt.Println(runtime.NumCPU())
+	fmt.Println(runtime.NumCPU())
 
-	//go showNumbers(100)
+	go showNumbers(100)
 
 	//runtime.Gosched()
-	//time.Sleep(time.Second)
+	time.Sleep(time.Microsecond)
 	fmt.Println("exit")
 
 	makePanic()

@@ -52,7 +52,7 @@ func main() {
 	usecase()
 }
 
-/*func explanation() {
+func explanation() {
 	//builder := WoodBuilder{Person{Name: "Вася", Age: 30}}
 	//builder := WoodBuilder{Person{Name: "Вася", Age: 30}, "Боб"}
 	builder := WoodBuilder{
@@ -70,7 +70,7 @@ func main() {
 	fmt.Println(builder.Person.Name)
 
 	builder.printName()
-}*/
+}
 
 func usecase() {
 	woodenBuilding := Building{

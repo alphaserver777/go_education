@@ -41,8 +41,8 @@ type Tester interface {
 }*/
 
 func main() {
-	//definition()
-	rules()
+	definition()
+	// rules()
 }
 
 type Square struct {
