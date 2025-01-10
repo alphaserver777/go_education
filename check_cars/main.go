@@ -22,7 +22,11 @@ type Car struct {
 }
 
 func main() {
+<<<<<<< HEAD
 	db, err := sql.Open("postgres", "user=postgres password=K#7sd4Na dbname=postgres sslmode=disable")
+=======
+	db, err := sql.Open("postgres", "user=postgres password=K#7sd4Na dbname=your_db sslmode=disable") // Replace with your connection string
+>>>>>>> 38011a1dc06b4ada43ffaed2cb442808b3ea67a8
 	if err != nil {
 		log.Fatalf("Ошибка подключения к базе данных: %v", err)
 	}

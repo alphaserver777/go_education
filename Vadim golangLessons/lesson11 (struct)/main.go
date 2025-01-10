@@ -54,7 +54,7 @@ func main() {
 
 	// create pointer to struct
 	pIvan := &Person{"Ivan", 90}
-	fmt.Println(pIvan)
+	fmt.Println(&pIvan)
 
 	unnamedStruct := struct {
 		Name, LastName, BirthDate string

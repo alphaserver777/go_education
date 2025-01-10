@@ -10,7 +10,11 @@
             "type": "go",
             "request": "launch",
             "mode": "debug",
+<<<<<<< HEAD
             "program": "${file}"
+=======
+            "program": "${fileDirname}"
+>>>>>>> 38011a1dc06b4ada43ffaed2cb442808b3ea67a8
         }
     ]
 }

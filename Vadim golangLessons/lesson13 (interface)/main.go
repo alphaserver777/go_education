@@ -2,19 +2,19 @@ package main
 
 import "fmt"
 
-type Runner interface {
-	Run() string
+type Runner interface { // Интерфейс Runner
+	Run() string // Метод Run()
 }
 
-type Swimmer interface {
-	Swim() string
+type Swimmer interface { // Интерфейс Swimmer
+	Swim() string // Метод Swim()
 }
 
-type Flyer interface {
-	Fly() string
+type Flyer interface { // Интерфейс Flyer
+	Fly() string // Метод Fly()
 }
 
-type Ducker interface {
+type Ducker interface { // Реализуем интерфейс Ducker
 	Runner
 	Swimmer
 	Flyer
@@ -40,7 +40,7 @@ func (d Duck) Run() string {
 	return "Утка бегает"
 }
 
-func (d Duck) Swim() string {
+func (d Duck) Swim() string { // Реализуем интерфейс Swimmer
 	return "Утка плавает"
 }
 
@@ -49,12 +49,12 @@ func (d Duck) Fly() string {
 }
 
 func main() {
-	//interfaceValues()
-	typeAssertionAndPolymorphism()
+	interfaceValues()
+	// typeAssertionAndPolymorphism()
 }
 
-func interfaceValues() {
-	var runner Runner
+func interfaceValues() { // Интерфейсные значения
+	var runner Runner // Объявляем переменную типа Runner
 	fmt.Printf("Type: %T Value: %#v\n", runner, runner)
 
 	if runner == nil {

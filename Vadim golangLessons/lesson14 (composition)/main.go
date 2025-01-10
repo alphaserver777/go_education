@@ -2,25 +2,25 @@ package main
 
 import "fmt"
 
-type Builder interface {
+type Builder interface { // интерфейс
 	Build()
 }
 
-type Person struct {
+type Person struct { // структура
 	Name string
 	Age  int
 }
 
-type WorkExperience struct {
+type WorkExperience struct { // структура
 	Name string
 	Age  int
 }
 
-func (p Person) printName() {
+func (p Person) printName() { // метод структуры Person
 	fmt.Println(p.Name)
 }
 
-type WoodBuilder struct {
+type WoodBuilder struct { // структура
 	Person
 	//Name string
 	//WorkExperience
@@ -30,7 +30,7 @@ type WoodBuilder struct {
 	fmt.Println(wb.Name)
 }*/
 
-func (wb WoodBuilder) Build() {
+func (wb WoodBuilder) Build() { // метод структуры WoodBuilder
 	fmt.Println("Строю дом из дерева")
 }
 
@@ -42,7 +42,7 @@ func (bb BrickBuilder) Build() {
 	fmt.Println("Строю из кирпича")
 }
 
-type Building struct {
+type Building struct { // структура
 	Builder
 	Name string
 }
@@ -72,6 +72,9 @@ func explanation() {
 	builder.printName()
 }
 
+// usecase demonstrates the usage of the Building struct and its associated builders.
+// It creates two instances of Building, one using a WoodBuilder and the other using a BrickBuilder,
+// and then calls the Build method on each instance to print the construction process.
 func usecase() {
 	woodenBuilding := Building{
 		Builder: WoodBuilder{Person{
