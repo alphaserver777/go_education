@@ -75,7 +75,7 @@ func main() {
 
 // Подключение к базе данных
 func connectToDatabase() (*sql.DB, error) {
-	password := url.QueryEscape("K#7sd4Na") // Замените на ваш пароль
+	password := url.QueryEscape("12345678") // Замените на ваш пароль
 	connStr := "postgres://postgres:" + password + "@localhost:5432/vpn_bot?sslmode=disable"
 	db, err := sql.Open("postgres", connStr)
 	if err != nil {
