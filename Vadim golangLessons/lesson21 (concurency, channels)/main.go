@@ -7,7 +7,7 @@ import (
 
 func main() {
 	//nilChannel()
-	//unbufferedChannel()
+	unbufferedChannel()
 	//bufferedChannel()
 	//forRange()
 }
@@ -17,7 +17,7 @@ func nilChannel() {
 	fmt.Printf("Len: %d Cap: %d\n", len(nilChannel), cap(nilChannel))
 
 	// write to nil channel blocks forever
-	//nilChannel <- 1
+	// nilChannel <- 1
 
 	// read from nil channel blocks forever
 	//<-nilChannel

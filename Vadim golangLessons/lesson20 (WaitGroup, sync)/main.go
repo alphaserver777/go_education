@@ -7,7 +7,7 @@ import (
 )
 
 func main() {
-	// Wait group
+	// NOTE:Wait group
 	// withoutWait()
 	// withWait()
 	// wrongAdd()
@@ -17,7 +17,7 @@ func main() {
 	// writeWithoutMutex()
 	// writeWithMutex()
 	// readWithMutex()
-	// readWithRWMutex()
+	readWithRWMutex()
 }
 
 func withoutWait() {
@@ -88,7 +88,7 @@ func writeWithoutMutex() {
 		go func() {
 			defer wg.Done()
 			time.Sleep(time.Nanosecond)
-			counter++ // counter = counter + 1 // 555 + 1 = 556 // 555 + 1 = 556
+			counter++ // BUG: Несколько ГОРУТИН могут обратиться одновременно к ресурсу counter = counter + 1 // 555 + 1 = 556 // 555 + 1 = 556. Теряются операции
 		}()
 	}
 	wg.Wait()
@@ -97,7 +97,7 @@ func writeWithoutMutex() {
 	fmt.Println(time.Now().Sub(start).Seconds())
 }
 
-func writeWithMutex() {
+func writeWithMutex() { // NOTE: Mutex исключает ситуацию, когда несколько операций ГОРУТИН могут обратиться одновременно к ресурсу. Не теряются операции.
 	start := time.Now()
 	var counter int
 	var wg sync.WaitGroup
@@ -110,9 +110,9 @@ func writeWithMutex() {
 			defer wg.Done()
 			time.Sleep(time.Nanosecond)
 
-			mu.Lock()
-			counter++
-			mu.Unlock()
+			mu.Lock()   // NOTE: Заблокировали одновременный доступ ГОРУТИН
+			counter++   // NOTE: Одна горутина получает доступ
+			mu.Unlock() // NOTE: Разблокирован доступ для других горутин
 		}()
 	}
 	wg.Wait()
@@ -156,7 +156,6 @@ func readWithMutex() {
 	}
 
 	wg.Wait()
-
 	fmt.Println(counter)
 	fmt.Println(time.Now().Sub(start).Seconds())
 }
@@ -175,23 +174,23 @@ func readWithRWMutex() {
 		go func() {
 			defer wg.Done()
 
-			mu.RLock()
+			mu.RLock() // NOTE: заблокировано на Чтение
 
 			time.Sleep(time.Nanosecond)
 			_ = counter
 
-			mu.RUnlock()
+			mu.RUnlock() // NOTE: Unlock fo READ
 		}()
 
 		go func() {
 			defer wg.Done()
 
-			mu.Lock()
+			mu.Lock() // NOTE: LOCK fo WRITE
 
 			time.Sleep(time.Nanosecond)
 			counter++
 
-			mu.Unlock()
+			mu.Unlock() // NOTE: Unlock fo write
 		}()
 	}
 
