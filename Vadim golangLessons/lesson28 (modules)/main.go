@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+
 	fiber2 "github.com/gofiber/fiber/v2"
 )
 

@@ -3,11 +3,12 @@ package main
 import (
 	"context"
 	"fmt"
-	"ourPackage"
+
+	// "ourPackage"
 
 	"golang.org/x/sync/errgroup"
 
-	"golangLessons/lesson27/ourPackageUnderGit"
+	"Vadim golangLessons/lesson27 packages/ourPackageUnderGit"
 )
 
 func main() {
