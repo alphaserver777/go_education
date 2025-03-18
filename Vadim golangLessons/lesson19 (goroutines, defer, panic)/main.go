@@ -7,6 +7,7 @@ import (
 )
 
 func main() {
+	firstCode()
 	//defer block
 	//defer fmt.Println(1)
 	//defer fmt.Println(2)
@@ -15,17 +16,19 @@ func main() {
 
 	// goroutines block
 	//runtime.GOMAXPROCS(1)
-	fmt.Println(runtime.NumCPU())
 
-	go showNumbers(100)
+}
+func firstCode() {
+	NumberCPU := fmt.Sprintf("%d", runtime.NumCPU())
+	fmt.Printf("Количество ядер: %s\n", NumberCPU)
+	go showNumbers(1000)
 
-	//runtime.Gosched()
+	runtime.Gosched() //инструмент для передачи управления другой горутине
 	time.Sleep(time.Microsecond)
 	fmt.Println("exit")
 
 	makePanic()
 }
-
 func showNumbers(num int) {
 	for i := 0; i < num; i++ {
 		fmt.Println(i)
