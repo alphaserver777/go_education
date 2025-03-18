@@ -1,20 +1,15 @@
 {
-    // Используйте IntelliSense, чтобы узнать о возможных атрибутах.
-    // Наведите указатель мыши, чтобы просмотреть описания существующих атрибутов.
-    // Для получения дополнительной информации посетите: https://go.microsoft.com/fwlink/?linkid=830387
-    "version": "0.2.0",
-    "configurations": [
-        
-        {
-            "name": "Launch Package",
-            "type": "go",
-            "request": "launch",
-            "mode": "debug",
-<<<<<<< HEAD
-            "program": "${file}"
-=======
-            "program": "${fileDirname}"
->>>>>>> 38011a1dc06b4ada43ffaed2cb442808b3ea67a8
-        }
-    ]
+	// Используйте IntelliSense, чтобы узнать о возможных атрибутах.
+	// Наведите указатель мыши, чтобы просмотреть описания существующих атрибутов.
+	// Для получения дополнительной информации посетите: https://go.microsoft.com/fwlink/?linkid=830387
+	"version": "0.2.0",
+	"configurations": [
+		{
+			"name": "Launch Package",
+			"type": "go",
+			"request": "launch",
+			"mode": "debug",
+			"program": "${fileDirname}"
+		}
+	]
 }
